@@ -123,6 +123,9 @@ public class JACC {
             if (this.instacesOf(str, '(') != this.instacesOf(str, ')')) {
                 throw new IllegalCalculatorInput("Incorrect number of parathesis"); 
             }
+            if (str.contains("st")) {
+                throw new IllegalCalculatorInput("You cannot use 'st'"); 
+            }
 
             // runs the elementary notation parser on str and sets output to the value returned
             output = elementaryParse(str);
