@@ -343,27 +343,16 @@ public class JACC {
         while (tokens.size() > 1) {
 
             // pemdas check for *, /, and %
+            char pemdasOp = 'n';
             int firstMult = operators.indexOf('*');
             int firstDiv = operators.indexOf('/');
             int firstMod = operators.indexOf('%');
-            char pemdasOp = 'n';
-            if (firstMult == -1) {
-                firstMult = operators.size() + 1;
+            for (char i : operators) {
+                if ((i == '*' || i == '%' || i == '/') && pemdasOp == 'n') {
+                    pemdasOp = i;
+                }
             }
-            if (firstDiv == -1) {
-                firstDiv = operators.size() + 1;
-            }
-            if (firstMod == -1) {
-                firstMod = operators.size() + 1;
-            }
-            if (Integer.compare(firstMult, firstDiv) < 0 & Integer.compare(firstMult, firstMod) < 0) {
-                pemdasOp = '*';
-            } else if (Integer.compare(firstDiv, firstMult) < 0 & Integer.compare(firstDiv, firstMod) < 0) {
-                pemdasOp = '/';
-            } else if (Integer.compare(firstMod, firstMult) < 0 & Integer.compare(firstMod, firstDiv) < 0) {
-                pemdasOp = '%';
-            }
-
+            
             // checks for powers
             if (operators.indexOf('^') != -1) {
                 // get the two tokens at the index, and after to do the operation on
